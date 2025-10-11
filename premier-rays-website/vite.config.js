@@ -3,7 +3,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   root: '.',            
-  base: '/website/',       
+  base: '/',       
   build: {
     outDir: 'dist',         
     emptyOutDir: true,
