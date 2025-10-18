@@ -6,11 +6,39 @@
   <title>Sports - Premier Rays</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="images/logo.png">
+  <style>
+    /* For image cards */
+    .image-box {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .image-box img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      filter: brightness(70%);
+      transition: 0.3s ease;
+    }
+    .image-box:hover {
+      transform: scale(1.03);
+    }
+    .text-overlay {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Premier Rays Badminton Venue</h1>
-    <p>Sahakar Nagar, Bengaluru</p>
+    <h1>Premier Rays Sports</h1>
+    <p>Badminton Venues | Accessories | Coaching</p>
   </header>
 
   <nav>
@@ -18,32 +46,33 @@
     <a href="tourism.html">Tourism</a>
     <a href="sports.html">Sports</a>
     <a href="travels.html">Tours & Travels</a>
+    <a href="gallery.html">Gallery</a>
   </nav>
 
   <div class="container">
-    <h2>Premier Rays Badminton Venue</h2>
-    <p>State-of-the-art badminton courts, coaching programs, and memberships available.</p>
+    <h2>Sports Division</h2>
+    <p>Premier Rays supports sports excellence through our badminton venues, accessories, and coaching programs.</p>
 
-    <h3>Photos</h3>
-    <img src="images/sports.jpg" alt="VIN" width="100%" />
+    <!-- Box Grid Section -->
+    <div class="box-grid">
+      <!-- VIN Badminton Academy -->
+      <a class="image-box" href="vin-academy.html">
+        <img src="images/sports.jpg" alt="VIN Badminton Academy">
+        <div class="text-overlay">
+          <h3>VIN Badminton Academy</h3>
+          <p>Sahakar Nagar, Bengaluru</p>
+        </div>
+      </a>
 
-    <h3>Location</h3>
-    <div style="width: 100%; max-width: 600px; height: 400px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.646437159271!2d77.5929322148216!3d13.04691429080945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17ff12345678%3A0xabcdef123456789!2sVin%20Badminton%20Academy!5e0!3m2!1sen!2sin!4v1691234567890!5m2!1sen!2sin"
-        width="100%"
-        height="100%"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+      <!-- Accessories and Training -->
+      <a class="image-box" href="accessories.html">
+        <img src="images/accessories.jpg" alt="Accessories and Training">
+        <div class="text-overlay">
+          <h3>Accessories & Training Enquiry</h3>
+          <p>Rackets | Shoes | Coaching | Gear</p>
+        </div>
+      </a>
     </div>
-
-
-    <h3>Contact</h3>
-    <p>Phone: +91-8123769542</p>
-    <p>Email: care@premierrays.com</p>
   </div>
 
   <footer>

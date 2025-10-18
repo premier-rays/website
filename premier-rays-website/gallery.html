@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery - Premier Rays</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <style>
+    /* Gallery styling */
+    .filter-bar {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .filter-btn {
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: #004c99;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 999;
+    }
+
+    .lightbox.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sub-filter {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Premier Rays Gallery</h1>
+    <p>Explore our Tourism, Sports & Travels Highlights</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="sports.html">Sports</a>
+    <a href="travels.html">Tours & Travels</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+
+  <div class="container">
+    <h2>Gallery</h2>
+    <p>Click a category to explore, or filter within to see specific experiences.</p>
+
+    <!-- Main Category Buttons -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="tourism">Tourism</button>
+      <button class="filter-btn" data-category="sports">Sports</button>
+      <button class="filter-btn" data-category="travels">Travels</button>
+    </div>
+
+    <!-- Subcategory Buttons (appear dynamically) -->
+    <div class="filter-bar sub-filter" id="subFilters"></div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid" id="gallery">
+      <!-- Example Images -->
+      <!-- Tourism -->
+      <div class="gallery-item tourism ecostay"><img src="images/tourism/ecostay/*.jpg" alt=""></div>
+      <div class="gallery-item tourism nature-treks"><img src="images/tourism/nature-treks/*.jpg" alt=""></div>
+      <div class="gallery-item tourism coffee-estate"><img src="images/tourism/coffee-estate/*.jpg" alt=""></div>
+      <!-- Sports -->
+      <div class="gallery-item sports courts"><img src="images/sports/courts/*.jpg" alt=""></div>
+      <div class="gallery-item sports training"><img src="images/sports/training/*.jpg" alt=""></div>
+      <div class="gallery-item sports accessories"><img src="images/sports/accessories/*.jpg" alt=""></div>
+      <!-- Travels -->
+      <div class="gallery-item travels innova"><img src="images/travels/innova/*.jpg" alt=""></div>
+      <div class="gallery-item travels urbania"><img src="images/travels/urbania/*.jpg" alt=""></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <img src="" alt="">
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Premier Rays Pvt Ltd.</p>
+  </footer>
+
+  <script>
+    const categoryButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const subFilters = document.getElementById('subFilters');
+
+    const subCategories = {
+      tourism: ['ecostay', 'nature-treks', 'coffee-estate'],
+      sports: ['courts', 'training', 'accessories'],
+      travels: ['innova', 'urbania']
+    };
+
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.category;
+
+        // Update subfilters
+        subFilters.innerHTML = '';
+        if (subCategories[cat]) {
+          subCategories[cat].forEach(sub => {
+            const sBtn = document.createElement('button');
+            sBtn.className = 'filter-btn';
+            sBtn.textContent = sub.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+            sBtn.onclick = () => filterSubCategory(cat, sub);
+            subFilters.appendChild(sBtn);
+          });
+        }
+
+        // Filter images
+        galleryItems.forEach(item => {
+          item.style.display = (cat === 'all' || item.classList.contains(cat)) ? 'block' : 'none';
+        });
+      });
+    });
+
+    function filterSubCategory(cat, sub) {
+      galleryItems.forEach(item => {
+        item.style.display = (item.classList.contains(cat) && item.classList.contains(sub)) ? 'block' : 'none';
+      });
+    }
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        lightboxImg.src = item.querySelector('img').src;
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+  </script>
+</body>
+</html>
