@@ -5,12 +5,20 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "server": "node server.js",
+        "dev:server": "nodemon --watch server.js --exec node server.js",
+        "dev:all": "concurrently \"npm:server\" \"npm:dev\"",
         "build": "vite build",
         "preview": "vite preview",
         "deploy": "npm run build && gh-pages -d dist"
     },
     "devDependencies": {
+        "concurrently": "^9.2.1",
         "gh-pages": "^6.3.0",
+        "nodemon": "^3.1.10",
         "vite": "^7.1.7"
+    },
+    "dependencies": {
+        "express": "^5.1.0"
     }
 }

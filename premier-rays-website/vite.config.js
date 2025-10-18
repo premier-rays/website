@@ -5,6 +5,16 @@ export default defineConfig({
   root: '.',
   base: '/',
   publicDir: 'public',
+  server: {
+    proxy: {
+      // Proxy /api to your local express server
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
