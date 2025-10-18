@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery - Premier Rays</title>
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <style>
+    /* Gallery styling */
+    .filter-bar {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .filter-btn {
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #004c99;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 999;
+    }
+
+    .lightbox.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sub-filter {
+      margin-top: 15px;
+    }
+  </style>
+  <link rel="stylesheet" crossorigin href="/assets/style-DjpDJeyj.css">
+</head>
+<body>
+  <header>
+    <h1>Premier Rays Gallery</h1>
+    <p>Explore our Tourism, Sports & Travels Highlights</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="sports.html">Sports</a>
+    <a href="travels.html">Tours & Travels</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+
+  <div class="container">
+    <h2>Gallery</h2>
+    <p>Click a category to explore, or filter within to see specific experiences.</p>
+
+    <!-- Main Category Buttons -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="tourism">Tourism</button>
+      <button class="filter-btn" data-category="sports">Sports</button>
+      <button class="filter-btn" data-category="travels">Travels</button>
+    </div>
+
+    <!-- Subcategory Buttons -->
+    <div class="filter-bar sub-filter" id="subFilters"></div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid" id="gallery"></div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <img src="" alt="">
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Premier Rays Pvt Ltd.</p>
+  </footer>
+
+  <!-- Dynamic Gallery Script -->
+  <script>
+    const gallery = document.getElementById("gallery");
+    const subFilters = document.getElementById("subFilters");
+    const categoryButtons = document.querySelectorAll(".filter-btn");
+
+    // Define subcategories for the filter UI
+    const subCategories = {
+      tourism: ['ecostay', 'nature-treks', 'coffee-estate'],
+      sports: ['courts', 'training', 'accessories'],
+      travels: ['urbania', 'innova']
+    };
+
+    let imageData = {};
+
+    // Fetch image list dynamically from Express server
+    async function loadImages() {
+      try {
+        const res = await fetch('/api/images');
+        if (!res.ok) throw new Error('Failed to load images');
+        imageData = await res.json();
+        renderGallery('all');
+      } catch (err) {
+        console.error('Error fetching images:', err);
+        gallery.innerHTML = '<p style="text-align:center;">Unable to load gallery images.</p>';
+      }
+    }
+
+    // Render gallery grid
+    function renderGallery(category = 'all', subcategory = null) {
+      gallery.innerHTML = '';
+
+      for (const cat in imageData) {
+        if (category !== 'all' && cat !== category) continue;
+
+        const subs = imageData[cat] || {};
+        for (const sub in subs) {
+          if (subcategory && sub !== subcategory) continue;
+
+          subs[sub].forEach(src => {
+            const div = document.createElement('div');
+            div.className = `gallery-item ${cat} ${sub}`;
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `${cat} ${sub}`;
+            div.appendChild(img);
+            gallery.appendChild(div);
+
+            div.addEventListener('click', () => openLightbox(src));
+          });
+        }
+      }
+
+      if (!gallery.children.length) {
+        gallery.innerHTML = '<p style="text-align:center;">No images available.</p>';
+      }
+    }
+
+    // Category filter handling
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.category;
+
+        // Update subfilters
+        subFilters.innerHTML = '';
+        if (subCategories[cat]) {
+          subCategories[cat].forEach(sub => {
+            const sBtn = document.createElement('button');
+            sBtn.className = 'filter-btn';
+            sBtn.textContent = sub.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+            sBtn.onclick = () => renderGallery(cat, sub);
+            subFilters.appendChild(sBtn);
+          });
+        }
+
+        renderGallery(cat);
+      });
+    });
+
+    // Lightbox functions
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+
+    // Close lightbox if clicking outside image
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Initial load
+    loadImages();
+  </script>
+</body>
+</html>

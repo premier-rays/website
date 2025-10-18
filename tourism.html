@@ -3,9 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tourism - Premier Rays</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Tourism - Premier Rays</title>
   <link rel="icon" type="image/png" href="images/logo.png">
+  <style>
+    .image-box {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .image-box img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      filter: brightness(70%);
+    }
+    .image-box:hover {
+      transform: scale(1.03);
+    }
+    .text-overlay {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+    }
+  </style>
+  <link rel="stylesheet" crossorigin href="/assets/style-DjpDJeyj.css">
 </head>
 <body>
   <header>
@@ -18,47 +44,37 @@
     <a href="tourism.html">Tourism</a>
     <a href="sports.html">Sports</a>
     <a href="travels.html">Tours & Travels</a>
+    <a href="gallery.html">Gallery</a>
   </nav>
 
   <div class="container">
-    <h2>Our Homestays</h2>
+    <h2>Our Homestays & Nature Experiences</h2>
+    <p>Choose your stay and explore our beautiful destinations.</p>
 
-    <div class="box">
-      <h3>Premier Rays Eco Stay</h3>
-      <img src="images/ecostay.jpg" alt="Eco Stay" width="100%" />
-      <p><b>Location:</b> Marasandra, Yelahanka</p>
-      <p><b>Contact:</b> +91-8123769543</p>
-      <p>
-      <a href="https://maps.app.goo.gl/zKQyLdZ85AeSTPZY7" target="_blank">
-            📍 View on Google Maps
+    <div class="box-grid">
+      <a class="image-box" href="ecostay.html">
+        <img src="images/ecostay.jpg" alt="Eco Stay">
+        <div class="text-overlay">
+          <h3>Premier Rays Eco Stay</h3>
+          <p>Venue and Sports — Marasandra, Yelahanka</p>
+        </div>
       </a>
-      </p>
-      </div>
 
-    <div class="box">
-      <h3>Premier Rays Stays & Treks</h3>
-      <img src="images/treks.jpg" alt="Stays & Treks" width="100%" />
-      <p><b>Location:</b> Doddaballapura</p>
-      <p><b>Contact:</b> +91-8123769543</p>
-      <p>
-      <a href="https://maps.app.goo.gl/zKQyLdZ85AeSTPZY7" target="_blank">
-            📍 View on Google Maps
+      <a class="image-box" href="treks.html">
+        <img src="images/treks.jpg" alt="Nature Treks">
+        <div class="text-overlay">
+          <h3>Eco Stays & Nature Treks</h3>
+          <p>Byrapura, Doddaballapura</p>
+        </div>
       </a>
-      </p>
-      </div>
-    </div>
 
-    <div class="box">
-      <h3>Premier Rays Coffee Estate</h3>
-      <img src="images/coffee.jpg" alt="Coffee Estate" width="100%" />
-      <p><b>Location:</b> Chikkamagaluru</p>
-      <p><b>Contact:</b> +91-8123769543</p>
-      <p>
-      <a href="https://maps.app.goo.gl/yTdfNt3i1vmzEHC37" target="_blank">
-            📍 View on Google Maps
+      <a class="image-box" href="coffeevilla.html">
+        <img src="images/coffee.jpg" alt="Coffee Estate">
+        <div class="text-overlay">
+          <h3>Coffee Estate Villa Stay</h3>
+          <p>Deviramma Betta, Chikkamagaluru</p>
+        </div>
       </a>
-      </p>
-      </div>
     </div>
   </div>
 

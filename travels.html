@@ -3,14 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tours & Travels - Premier Rays</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Tours & Travels - Premier Rays</title>
   <link rel="icon" type="image/png" href="images/logo.png">
+  <style>
+    .image-box {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .image-box img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      filter: brightness(70%);
+      transition: 0.3s ease;
+    }
+    .image-box:hover {
+      transform: scale(1.03);
+    }
+    .text-overlay {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+    }
+  </style>
+  <link rel="stylesheet" crossorigin href="/assets/style-DjpDJeyj.css">
 </head>
 <body>
   <header>
     <h1>Premier Rays Tours & Travels</h1>
-    <p>Luxury Fleet - Innova & Urbania</p>
+    <p>Luxury Fleet - Innova Crysta & Urbania</p>
   </header>
 
   <nav>
@@ -18,23 +45,29 @@
     <a href="tourism.html">Tourism</a>
     <a href="sports.html">Sports</a>
     <a href="travels.html">Tours & Travels</a>
+    <a href="gallery.html">Gallery</a>
   </nav>
 
   <div class="container">
     <h2>Our Vehicles</h2>
+    <p>Choose your ride to explore features, gallery, and contact details.</p>
 
-    <div class="box">
-      <h3>7-Seater Innova Crysta</h3>
-      <img src="images/innova.jpg" alt="Innova Crysta" width="100%" />
-      <p><b>Features:</b> Comfortable seating, AC, premium travel experience</p>
-      <p><b>Contact:</b> +91-8123769545</p>
-    </div>
+    <div class="box-grid">
+      <a class="image-box" href="innova.html">
+        <img src="images/innova.jpg" alt="Innova Crysta">
+        <div class="text-overlay">
+          <h3>7-Seater Innova Crysta</h3>
+          <p>Comfort | Class | Safety</p>
+        </div>
+      </a>
 
-    <div class="box">
-      <h3>10-Seater Luxury Urbania</h3>
-      <img src="images/urbania.jpg" alt="Urbania" width="100%" />
-      <p><b>Features:</b> Spacious interiors, luxury comfort, perfect for group travel</p>
-      <p><b>Contact:</b> +91-8123769545</p>
+      <a class="image-box" href="urbania.html">
+        <img src="images/urbania.jpg" alt="Urbania">
+        <div class="text-overlay">
+          <h3>10-Seater Urbania</h3>
+          <p>Luxury | Space | Group Travel</p>
+        </div>
+      </a>
     </div>
   </div>
 
