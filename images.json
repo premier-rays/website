@@ -1,25 +1,5 @@
 [
   {
-    "url": "/images/accessories.jpg",
-    "category": "images"
-  },
-  {
-    "url": "/images/coffee.jpg",
-    "category": "images"
-  },
-  {
-    "url": "/images/ecostay.jpg",
-    "category": "images"
-  },
-  {
-    "url": "/images/innova.jpg",
-    "category": "images"
-  },
-  {
-    "url": "/images/logo.png",
-    "category": "images"
-  },
-  {
     "url": "/images/sports/accessories/accessories (2).jpg",
     "category": "accessories"
   },
@@ -30,10 +10,6 @@
   {
     "url": "/images/sports/courts/court.jpg",
     "category": "courts"
-  },
-  {
-    "url": "/images/sports.jpg",
-    "category": "images"
   },
   {
     "url": "/images/tourism/coffee-estate/coffeevilla (1).jpg",
@@ -53,6 +29,10 @@
   },
   {
     "url": "/images/tourism/coffee-estate/coffeevilla (13).jpg",
+    "category": "coffee-estate"
+  },
+  {
+    "url": "/images/tourism/coffee-estate/coffeevilla (14).jpg",
     "category": "coffee-estate"
   },
   {
@@ -184,10 +164,6 @@
     "category": "nature-treks"
   },
   {
-    "url": "/images/tourism.jpg",
-    "category": "images"
-  },
-  {
     "url": "/images/travels/innova/innova (1).jpg",
     "category": "innova"
   },
@@ -226,17 +202,5 @@
   {
     "url": "/images/travels/urbania/Urbania_front.jpg",
     "category": "urbania"
-  },
-  {
-    "url": "/images/travels.jpg",
-    "category": "images"
-  },
-  {
-    "url": "/images/treks.jpg",
-    "category": "images"
-  },
-  {
-    "url": "/images/urbania.jpg",
-    "category": "images"
   }
 ]
