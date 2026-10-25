@@ -33,6 +33,8 @@ export default defineConfig({
         coffeevilla: resolve(__dirname, 'coffeevilla.html'),
         treks: resolve(__dirname, 'treks.html'),
         gallery: resolve(__dirname, 'gallery.html'),
+        contact: resolve(__dirname, 'contact.html'),
+        notFound: resolve(__dirname, '404.html'),
       }
     }
   }
